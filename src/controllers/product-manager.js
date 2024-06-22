@@ -51,7 +51,7 @@ class ProductManager {
 
             await this.saveProduct(arrayProducts)
         } catch (error) {
-            console.error("Erro al leer el archivo", error)
+            console.error("Error al leer el archivo", error)
             throw error
         }
     }

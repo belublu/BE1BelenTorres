@@ -1,0 +1,32 @@
+<h1>Lista de productos</h1>
+
+<div id="productsList">
+
+    {{!-- {{#each products}}
+    <div>
+        <h2>{{this.title}}</h2>
+        <p>{{this.description}}</p>
+        <p>Precio: ${{this.price}}</p>
+        <p>Stock: {{this.stock}}</p>
+    </div>
+    {{/each}} --}}
+</div>
+
+<form id="productForm">
+    <h3>Agregar nuevos productos al inventario</h3>
+    <input type="text" name="title" placeholder="Ingrese el nombre del producto">
+    <input type="text" name="description" placeholder="Ingrese la descripción del producto">
+    <input type="number" name="price" placeholder="Ingrese el precio del producto">
+    <input type="number" name="stock" placeholder="Ingrese el stock del producto">
+    <button type="submit" id="btnSend">Agregar producto</button>
+</form>
+</ul>
+
+
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"
+    integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO"
+    crossorigin="anonymous"></script>
+
+
+
+<scrip src="js/main.js"></scrip>
