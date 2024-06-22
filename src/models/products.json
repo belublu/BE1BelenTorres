@@ -130,5 +130,17 @@
     "status": true,
     "thumbnails": [],
     "id": 13
+  },
+  {
+    "title": "Carpeta Pepito",
+    "description": "Carpetita",
+    "price": 16750,
+    "img": "Sin Imagen",
+    "code": "Librería",
+    "stock": 200,
+    "category": "Libería",
+    "status": true,
+    "thumbnails": [],
+    "id": 14
   }
 ]
