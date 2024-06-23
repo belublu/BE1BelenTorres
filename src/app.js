@@ -24,18 +24,20 @@ app.set("view engine", "handlebars")
 app.set("views", "./src/views")
 
 
+
 const httpServer = app.listen(PORT, () => {
     console.log(`Escuchando en el puerto: ${PORT}`)
 })
 
 
-const io = new Server(httpServer); 
+const io = new Server(httpServer)
 
 io.on("connection", async (socket) => {
     console.log("Un cliente se conectó.")
-    const products = await productManager.getProducts()
+    socket.emit("products", await productManager.getProducts())
+   /*  const products = await productManager.getProducts()
     console.log("Enviando productos", products)
-    socket.emit("products", products)
+    socket.emit("products", products) */
 
     socket.on("deleteProduct", async (id) => {
         await productManager.deleteProduct(id)

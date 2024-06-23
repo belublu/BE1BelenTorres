@@ -6,8 +6,8 @@ socket.on("products", (data) => {
 })
 
 const renderProducts = (data) => {
-    console.log("Datos recibidos para renderizar", data)
-    const productsList = document.getElementById("productsList")
+/*     console.log("Datos recibidos para renderizar", data)
+ */    const productsList = document.getElementById("productsList")
     productsList.innerHTML = ""
 
     data.forEach((product) => {
@@ -17,22 +17,26 @@ const renderProducts = (data) => {
                             <h2>${product.title}</h2>
                             <p>${product.description}</p>
                             <p>Precio: ${product.price}</p>
+                            <img src="${product.img}" alt="">
+                            <p> Código: ${product.code}</p>
                             <p>Stock: ${product.stock}</p>
-                            <button id="btnDelete"> Eliminar </button>
+                            <p> Categoría: ${product.category}</p>
+                            <button class="btnDelete"> Eliminar </button>
                         `
         productsList.appendChild(card)
-        card.querySelector("button").addEventListener("click", () => {
-            deleteProduct()
+        card.querySelector(".btnDelete").addEventListener("click", () => {
+            deleteProduct(product.id)
         })
     });
-        
+
 }
 
 const deleteProduct = (id) => {
-    socket.emit("eliminarProduct", id)
+    socket.emit("deleteProduct", id)
 }
 
-document.getElementById("btnSend").addEventListener("click", () => {
+document.getElementById("productForm").addEventListener("submit", (e) => {
+    e.preventDefault()
     addProduct()
 })
 
@@ -49,6 +53,6 @@ const addProduct = () => {
     }
 
     socket.emit("addProduct", product);
-    }
+}
 
 
