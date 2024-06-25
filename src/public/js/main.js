@@ -11,19 +11,23 @@ const renderProducts = (data) => {
     productsList.innerHTML = ""
 
     data.forEach((product) => {
+        const cardCol = document.createElement("div")
+        cardCol.classList.add("col-4", "mb-4")
         const card = document.createElement("div")
-        card.classList.add("productCard")
+        card.classList.add("card")
         card.innerHTML = `
-                            <h2>${product.title}</h2>
-                            <p>${product.description}</p>
-                            <p>Precio: ${product.price}</p>
-                            <img src="${product.img}" alt="">
-                            <p> Código: ${product.code}</p>
-                            <p>Stock: ${product.stock}</p>
-                            <p> Categoría: ${product.category}</p>
-                            <button class="btnDelete"> Eliminar </button>
+                            <img src="${product.img}" class="card-img-top" alt="FotoProducto">
+                            <div class="card-body">
+                            <h5 class="card-title text-center">${product.title}</h5>
+                            <p class="card-text">${product.description}</p>
+                            <p class="card-text">Precio: $${product.price}</p>
+                            <p class="card-text">Código: ${product.code}</p>
+                            <p class="card-text">Stock: ${product.stock}</p>
+                            <p class="card-text">Categoría: ${product.category}</p>
+                            <button class="btnDelete btn btn-danger">Eliminar</button>
                         `
-        productsList.appendChild(card)
+        cardCol.appendChild(card)
+        productsList.appendChild(cardCol)
         card.querySelector(".btnDelete").addEventListener("click", () => {
             deleteProduct(product.id)
         })
@@ -36,22 +40,28 @@ const deleteProduct = (id) => {
 }
 
 document.getElementById("productForm").addEventListener("submit", (e) => {
-    e.preventDefault()
+   
     addProduct()
 })
 
 const addProduct = () => {
-    const product = {
-        title: document.getElementById("title").value,
-        description: document.getElementById("description").value,
-        price: document.getElementById("price").value,
-        img: document.getElementById("img").value,
-        code: document.getElementById("code").value,
-        stock: document.getElementById("stock").value,
-        category: document.getElementById("category").value,
-        status: document.getElementById("status").value === "true",
-    }
+    const titleProduct = document.getElementById("title").value.trim()
+    const descriptionProduct = document.getElementById("description").value.trim()
+    const priceProduct = document.getElementById("price").value.trim()
+    const codeProduct = document.getElementById("code").value.trim()
+    const stockProduct = document.getElementById("stock").value.trim()
+    const categoryProduct = document.getElementById("category").value.trim()
 
+    const product = {
+        title: titleProduct,
+        description: descriptionProduct,
+        price: parseFloat(priceProduct),
+        /* img: document.getElementById("img").value, */
+        code: codeProduct,
+        stock: parseInt(stockProduct),
+        category: categoryProduct,
+        /*  status: document.getElementById("status").value === "true", */
+    }
     socket.emit("addProduct", product);
 }
 

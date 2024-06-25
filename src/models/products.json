@@ -1,53 +1,5 @@
 [
   {
-    "id": 1,
-    "title": "Cuaderno Mooving",
-    "description": "A4",
-    "price": 10550,
-    "img": "Sin Imagen",
-    "code": "Librería",
-    "stock": 1,
-    "category": "Libería",
-    "status": true,
-    "thumbnails": []
-  },
-  {
-    "id": 3,
-    "title": "Goma de borrar Parker",
-    "description": "Pack x 2u.",
-    "price": 1200,
-    "img": "Sin Imagen",
-    "code": "Librería",
-    "stock": 10,
-    "category": "Libería",
-    "status": true,
-    "thumbnails": []
-  },
-  {
-    "id": 4,
-    "title": "Marcador Acuarela Mooving",
-    "description": "Color Verde",
-    "price": 2650,
-    "img": "Sin Imagen",
-    "code": "Librería",
-    "stock": 10,
-    "category": "Libería",
-    "status": true,
-    "thumbnails": []
-  },
-  {
-    "id": 5,
-    "title": "Marcador Posca",
-    "description": "Color Azul",
-    "price": 19650,
-    "img": "Sin Imagen",
-    "code": "Librería",
-    "stock": 10,
-    "category": "Libería",
-    "status": true,
-    "thumbnails": []
-  },
-  {
     "id": 6,
     "title": "Block de hojas Nro 5 El Nene",
     "description": "Color Blanco",
@@ -108,39 +60,41 @@
     "id": 11
   },
   {
-    "title": "Borratintas Pelikan",
-    "description": "Borratintas",
-    "price": 750,
-    "img": "Sin Imagen",
+    "title": "Acuarela",
+    "description": "Colores",
+    "price": 234,
     "code": "Librería",
-    "stock": 2,
-    "category": "Libería",
+    "stock": 32,
+    "category": "Librería",
     "status": true,
     "thumbnails": [],
-    "id": 12
+    "id": 15
   },
   {
-    "title": "Carpeta Pepito",
-    "description": "Carpetita",
-    "price": 16750,
-    "img": "Sin Imagen",
+    "title": "Lapicera Simball",
+    "description": "Borrable azul",
+    "price": 1234,
     "code": "Librería",
-    "stock": 200,
-    "category": "Libería",
-    "status": true,
-    "thumbnails": [],
-    "id": 13
+    "stock": 45,
+    "category": "Librería",
+    "id": 16
   },
   {
-    "title": "Carpeta Pepito",
-    "description": "Carpetita",
-    "price": 16750,
-    "img": "Sin Imagen",
+    "title": "Sacapuntas Pelikan",
+    "description": "Metálico",
+    "price": 1232,
     "code": "Librería",
-    "stock": 200,
-    "category": "Libería",
-    "status": true,
-    "thumbnails": [],
-    "id": 14
+    "stock": 23,
+    "category": "Librería",
+    "id": 17
+  },
+  {
+    "title": "Resaltador Filgo",
+    "description": "Color Azul celeste",
+    "price": 1000,
+    "code": "Librería",
+    "stock": 20,
+    "category": "Librería",
+    "id": 18
   }
 ]

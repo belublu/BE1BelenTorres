@@ -4,6 +4,7 @@ import ProductManager from "../controllers/product-manager.js";
 const router = express.Router()
 const productManager = new ProductManager("src/models/products.json")
 
+
 router.get("/", async (req, res) => {
     try {
         const limit = req.query.limit
@@ -46,6 +47,7 @@ router.post("/", async (req, res) => {
     }
 })
 
+
 router.put("/:pid", async (req, res) => {
     const id = req.params.pid
     const productUpdated = req.body
@@ -61,6 +63,7 @@ router.put("/:pid", async (req, res) => {
         res.status(500).json({error: "Error al actualizar el producto.", error})
     }
 })
+
 
 router.delete("/:pid", async (req, res) => {
     const id = req.params.pid

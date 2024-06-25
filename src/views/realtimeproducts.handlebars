@@ -1,32 +1,32 @@
-<h1>Lista de productos</h1>
+<div class="container my-5">
+    <h1 class="title text-center mb-4">Lista de productos</h1>
+    <div class="row">
+        <div class="col-8">
+            <div class="row" id="productsList"></div>
+        </div>
 
-<div id="productsList">
-
-    {{!-- {{#each products}}
-    <div>
-        <h2>{{this.title}}</h2>
-        <p>{{this.description}}</p>
-        <p>Precio: ${{this.price}}</p>
-        <p>Stock: {{this.stock}}</p>
+        <div class="col-4 ">
+            <form class="m-4 p-4" id="productForm">
+                <h4 class="text-center mx-4">Agregar nuevos productos al inventario</h4>
+                <input type="text" name="title" id="title" class="form-control my-3 p-3"
+                    placeholder="Ingrese el nombre del producto" required>
+                <input type="text" name="description" id="description" class="form-control my-3 p-3"
+                    placeholder="Ingrese la descripción del producto" required>
+                <input type="number" name="price" id="price" class="form-control my-3 p-3"
+                    placeholder="Ingrese el precio del producto" required>
+                <input type="number" name="stock" id="stock" class="form-control my-3 p-3"
+                    placeholder="Ingrese el stock del producto" required>
+                <input type="text" name="code" id="code" class="form-control my-3 p-3"
+                    placeholder="Ingrese el código del producto" required>
+                <input type="text" name="category" id="category" class="form-control my-3 p-3"
+                    placeholder="Ingrese la categoría del producto" required>
+                <button type="submit" id="btnSend" class="btn btn-primary my-3 w-100">Agregar producto</button>
+            </form>
+        </div>
     </div>
-    {{/each}} --}}
 </div>
-
-<form id="productForm">
-    <h3>Agregar nuevos productos al inventario</h3>
-    <input type="text" name="title" placeholder="Ingrese el nombre del producto">
-    <input type="text" name="description" placeholder="Ingrese la descripción del producto">
-    <input type="number" name="price" placeholder="Ingrese el precio del producto">
-    <input type="number" name="stock" placeholder="Ingrese el stock del producto">
-    <button type="submit" id="btnSend">Agregar producto</button>
-</form>
-</ul>
-
-
-
 
 <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"
     integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO"
     crossorigin="anonymous"></script>
-
 <script src="js\main.js"></script>

@@ -1,0 +1,10 @@
+.card{
+    --bs-card-border-color: rgb(255 71 129 / 18%);
+    --bs-card-border-width: 2px;
+    background-color: #fd0d0d17;
+}
+
+form{
+    background-color: rgb(255 71 129 / 18%);
+    border-radius: 5px;
+}
