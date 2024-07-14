@@ -1,6 +1,5 @@
 [
   {
-    "id": 6,
     "title": "Block de hojas Nro 5 El Nene",
     "description": "Color Blanco",
     "price": 9850,
@@ -12,7 +11,6 @@
     "thumbnails": []
   },
   {
-    "id": 7,
     "title": "Repuesto de lapicera borrable",
     "description": "Color Rojo",
     "price": 650,
@@ -24,7 +22,6 @@
     "thumbnails": []
   },
   {
-    "id": 8,
     "title": "Ganchos abrochadora",
     "description": "Nro 10",
     "price": 950,
@@ -36,7 +33,6 @@
     "thumbnails": []
   },
   {
-    "id": 9,
     "title": "Cartuchera Talbot",
     "description": "Color Verde",
     "price": 13250,
@@ -56,8 +52,7 @@
     "stock": 4,
     "category": "Libería",
     "status": true,
-    "thumbnails": [],
-    "id": 11
+    "thumbnails": []
   },
   {
     "title": "Acuarela",
@@ -67,8 +62,7 @@
     "stock": 32,
     "category": "Librería",
     "status": true,
-    "thumbnails": [],
-    "id": 15
+    "thumbnails": []
   },
   {
     "title": "Lapicera Simball",
@@ -76,8 +70,7 @@
     "price": 1234,
     "code": "Librería",
     "stock": 45,
-    "category": "Librería",
-    "id": 16
+    "category": "Librería"
   },
   {
     "title": "Sacapuntas Pelikan",
@@ -85,8 +78,7 @@
     "price": 1232,
     "code": "Librería",
     "stock": 23,
-    "category": "Librería",
-    "id": 17
+    "category": "Librería"
   },
   {
     "title": "Resaltador Filgo",
@@ -94,7 +86,6 @@
     "price": 1000,
     "code": "Librería",
     "stock": 20,
-    "category": "Librería",
-    "id": 18
+    "category": "Librería"
   }
 ]

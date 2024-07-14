@@ -4,8 +4,9 @@ import productsRouter from "./routes/products.router.js"
 import cartsRouter from "./routes/carts.router.js"
 import viewsRouter from "./routes/views.router.js"
 
-import ProductManager from "./controllers/product-manager.js"
+import ProductManager from "./dao/fs/product-manager.js"
 import { Server } from "socket.io"
+import "./database.js"
 
 const app = express()
 const PORT = 8080
