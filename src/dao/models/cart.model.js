@@ -1,10 +1,11 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
+import paginate from "mongoose-paginate-v2";
 
 const cartSchema = new mongoose.Schema({
     products: [
         {
             product: {
-                type: mongoose.Schema.type.ObjectId,
+                type: mongoose.Schema.Types.ObjectId,
                 ref: "Product",
                 required: true
             },
@@ -15,6 +16,8 @@ const cartSchema = new mongoose.Schema({
         }
     ]
 })
+
+cartSchema.plugin(paginate)
 
 const CartModel = mongoose.model("carts", cartSchema)
 

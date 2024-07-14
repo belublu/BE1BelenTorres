@@ -1,19 +1,33 @@
 import express from "express";
-import ProductManager from "../dao/fs/product-manager.js";
+import ProductManager from "../dao/db/product-manager-db.js";
 
 const router = express.Router()
-const productManager = new ProductManager("src/models/products.json")
+const productManager = new ProductManager()
 
 
 router.get("/", async (req, res) => {
     try {
-        const limit = req.query.limit
-        const products = await productManager.getProducts()
-        if (limit) {
-            res.json(products.slice(0, parseInt(limit)))
-        } else {
-            res.json(products)
-        }
+        const { limit = 10, page = 1, sort, query} = req.query
+
+        const products = await productManager.getProducts({
+            limit: parseInt(limit),
+            page: parseInt(page),
+            sort,
+            query
+        })
+        res.json({
+            status: "sucess",
+            payload: products,
+            totalPages: products.totalPages,
+            prevPage: products.prevPage,
+            nextPage: products.nextPage,
+            page: products.page,
+            hasPrevPage: products.hasPrevPage,
+            hasNextPage: products.hasNextPage,
+            prevLink: products.hasPrevPage ? `/api/products?limit=${limit}&page=${products.prevPage}&sort=${sort}&query=${query}` : null,
+            nextLink: products.hasNextPage ? `/api/products?limit=${limit}&page=${products.nextPage}&sort=${sort}&query=${query}` : null,
+        })
+       
     } catch (error) {
         console.error("Ha ocurrido un error al obtener los productos.", error)
         res.status(500).json({error: "Error al obtener el producto"})
@@ -25,7 +39,7 @@ router.get("/:pid", async (req, res) => {
     const id = req.params.pid
 
     try {
-        const product = await productManager.getProductById(parseInt(id))
+        const product = await productManager.getProductById(id)
         if(!product){
             res.status(404).json({error: "El producto no ha sido encontrado."})
         }
@@ -53,7 +67,7 @@ router.put("/:pid", async (req, res) => {
     const productUpdated = req.body
     
     try {
-        await productManager.updateProduct(parseInt(id), productUpdated)
+        await productManager.updateProduct(id, productUpdated)
         if(productUpdated){
             res.status(201).json("El producto se ha actualizado correctamente.")
         }else{
@@ -70,7 +84,7 @@ router.delete("/:pid", async (req, res) => {
     const productDeleted = req.body
     
     try {
-        await productManager.deleteProduct(parseInt(id), productDeleted)
+        await productManager.deleteProduct(id, productDeleted)
         if(productDeleted){
             res.status(201).json("El producto se ha eliminado correctamente.")
         }else{

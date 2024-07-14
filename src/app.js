@@ -3,10 +3,10 @@ import exphbs from "express-handlebars"
 import productsRouter from "./routes/products.router.js"
 import cartsRouter from "./routes/carts.router.js"
 import viewsRouter from "./routes/views.router.js"
-
-import ProductManager from "./dao/fs/product-manager.js"
-import { Server } from "socket.io"
 import "./database.js"
+import ProductManager from "./dao/db/product-manager-db.js"
+import { Server } from "socket.io"
+
 
 const app = express()
 const PORT = 8080
