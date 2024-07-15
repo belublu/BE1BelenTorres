@@ -7,17 +7,18 @@ const productManager = new ProductManager()
 
 router.get("/", async (req, res) => {
     try {
-        const { limit = 10, page = 1, sort, query} = req.query
-
-        const products = await productManager.getProducts({
+        const {limit = 10, page = 1, sort, query} = req.body
+        const options = {
             limit: parseInt(limit),
             page: parseInt(page),
-            sort,
-            query
-        })
+            sort: 
+            sort ? { price: sort === "asc" ? 1 : -1 } : {},
+            query,
+        }
+        const products = await productManager.getProducts(query ? {category: query} : {}, options)
         res.json({
             status: "sucess",
-            payload: products,
+            payload: products.docs,
             totalPages: products.totalPages,
             prevPage: products.prevPage,
             nextPage: products.nextPage,

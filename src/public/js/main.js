@@ -6,8 +6,8 @@ socket.on("products", (data) => {
 })
 
 const renderProducts = (data) => {
-/*     console.log("Datos recibidos para renderizar", data)
- */    const productsList = document.getElementById("productsList")
+
+ const productsList = document.getElementById("productsList")
     productsList.innerHTML = ""
 
     data.forEach((product) => {
@@ -56,11 +56,9 @@ const addProduct = () => {
         title: titleProduct,
         description: descriptionProduct,
         price: parseFloat(priceProduct),
-        /* img: document.getElementById("img").value, */
         code: codeProduct,
         stock: parseInt(stockProduct),
         category: categoryProduct,
-        /*  status: document.getElementById("status").value === "true", */
     }
     socket.emit("addProduct", product);
 }

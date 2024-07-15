@@ -17,14 +17,16 @@
         </div>
         {{/each}}
 
-        {{#if hasPrevPage}}
-        <a href="/products?page={{prevPage}}">Anterior</a>
-        {{/if}}
+        <div class="col-12 text-center">
+            {{#if hasPrevPage}}
+                <a href="{{prevLink}}" class="btn btn-primary">Anterior</a>
+            {{/if}}
 
-        {{#if hasNextPage}}
-        <a href="/products?page={{nextPage}}">Siguiente</a>
-        {{/if}}
+            {{#if hasNextPage}}
+                <a href="{{nextLink}}" class="btn btn-primary">Siguiente</a>
+            {{/if}}
 
-        <p>Página {{currentPage}} de {{totalPages}}</p>
+            <p>Página {{currentPage}} de {{totalPages}}</p>
+        </div>
     </div>
 </div>
