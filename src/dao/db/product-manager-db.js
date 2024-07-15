@@ -52,7 +52,7 @@ class ProductManager {
             if (!productToSearch) {
                 console.log("El producto no ha sido encontrado")
                 return null
-            } else { // FIJARME SI ES NECESARIO AGREGAR UN CONSOLE.LOG
+            } else { 
                 return productToSearch
             }
         } catch (error) {
@@ -80,20 +80,13 @@ class ProductManager {
     async deleteProduct(id) {
         try {
             const deleteProd = await ProductModel.findByIdAndDelete(id)
-            if(!deleteProd){ // VERIFICAR SI NO QUEDA MEJOR DELETEPROD SIN EL ! Y MODIFICAR EL ORDEN DE LOS CONSOLES
+            if(!deleteProd){ 
                 console.log("El producto no ha sido encontrado.")
                 return null
             }else{
                 console.log("El producto ha sido eliminado exitosamente.")
                 return deleteProd
             } 
-            /* if (index !== -1) {
-                products.splice(index, 1)
-                await this.saveProduct(products)
-                console.log("El producto ha sido eliminado")
-            } else {
-                console.log("El producto no ha sido encontrado")
-            } */
         } catch (error) {
             console.error("Error al eliminar el producto.", error)
             throw error
