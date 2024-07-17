@@ -53,4 +53,18 @@ router.post("/:cid/product/:pid", async (req, res) => {
     }
 });
 
+
+// TERMINAR DE DESARROLLAR EN CART-MANAGER ANTES DE SEGUIR
+/* router.delete("/:cid/products/:pid", async (req, res) => {
+    const cartId = req.params.cid
+    const product = req.params.pid
+    
+    try {
+        const deleteProductCart = await cartManager.
+    } catch (error) {
+        console.error("Error al eliminar el producto del carrito:", error);
+        res.status(500).json({ error: "Error del servidor." });
+    }
+}) */
+
 export default router

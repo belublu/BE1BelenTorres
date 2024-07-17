@@ -1,6 +1,16 @@
 import CartModel from "../models/cart.model.js"
 
 class CartManager {
+    async getCarts() {
+        try {
+            const carts = await CartModel.find()
+            return carts
+        } catch (error) {
+            console.log("Error al obtener los carritos", error);
+            throw error;
+        }
+    }
+
     async getCartById(id) {
         try {
             const cart = await CartModel.findById(id)

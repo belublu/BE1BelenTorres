@@ -16,9 +16,10 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(express.static("./src/public"))
 
+
 app.use("/api/products", productsRouter)
 app.use("/api/carts", cartsRouter)
-app.use("/", viewsRouter)
+app.use("/products", viewsRouter)
 
 app.engine("handlebars", exphbs.engine())
 app.set("view engine", "handlebars")

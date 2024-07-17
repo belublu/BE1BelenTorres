@@ -7,12 +7,44 @@ const router = express.Router()
 const productManager = new ProductManager()
 const cartManager = new CartManager()
 
-router.get("/", async (req, res) => {
+/* router.get("/", async (req, res) => {
     const products = await productManager.getProducts()
     res.render("home", {products})
-})
+}) */
 
-/* router.get("/products", async (req, res) => {
+
+
+router.get("/", async (req, res) => {
+    try {
+        const { page = 1, limit = 10, sort = "asc", query } = req.query;
+        const options = {
+            limit: parseInt(limit),
+            page: parseInt(page),
+            sort: sort ? { price: sort === "asc" ? 1 : -1 } : {},
+        };
+        const products = await productManager.getProducts(query ? { category: query } : {}, options);
+
+        const prevLink = products.hasPrevPage ? `/?limit=${limit}&page=${products.prevPage}&sort=${sort}&query=${query}` : null;
+        const nextLink = products.hasNextPage ? `/?limit=${limit}&page=${products.nextPage}&sort=${sort}&query=${query}` : null;
+
+        res.render("products", {
+            products: products.docs,
+            hasPrevPage: products.hasPrevPage,
+            hasNextPage: products.hasNextPage,
+            prevPage: products.prevPage,
+            nextPage: products.nextPage,
+            currentPage: products.page,
+            totalPages: products.totalPages,
+            prevLink,
+            nextLink
+        });
+    } catch (error) {
+        console.error("Ha ocurrido un error al obtener los productos.", error);
+        res.status(500).json({ error: "Error al obtener los productos", details: error.message });
+    }
+});
+
+/* router.get("/", async (req, res) => {
     const { page = 1, limit = 10, sort = "asc", query } = req.query
     const products = await productManager.getProducts({
         page: parseInt(page),
@@ -20,6 +52,7 @@ router.get("/", async (req, res) => {
         sort: sort,
         query
     })
+    console.log(products)
     try {
         const listProducts = await ProductManager.paginate({ page, limit, sort, query})
 
@@ -28,7 +61,7 @@ router.get("/", async (req, res) => {
             return rest
         })
 
-        res.render("products", {
+        res.render("home", {
             products: newArrayProducts,
             hasPrevPage: products.hasPrevPage,
             hasNextPage: products.hasNextPage,

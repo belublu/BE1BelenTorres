@@ -7,15 +7,19 @@ const productManager = new ProductManager()
 
 router.get("/", async (req, res) => {
     try {
-        const {limit = 10, page = 1, sort, query} = req.body
+        const {page = 1, sort= "asc", query} = req.query
         const options = {
-            limit: parseInt(limit),
             page: parseInt(page),
-            sort: 
-            sort ? { price: sort === "asc" ? 1 : -1 } : {},
+            sort: sort ? { price: sort === "asc" ? 1 : -1 } : {},
             query,
         }
         const products = await productManager.getProducts(query ? {category: query} : {}, options)
+
+        console.log("Productos obtenidos:", products.docs)
+
+        const prevLink = products.hasPrevPage ? `/products?limit=${limit}&page=${products.prevPage}&sort=${sort}&query=${query}` : null;
+        const nextLink = products.hasNextPage ? `/products?limit=${limit}&page=${products.nextPage}&sort=${sort}&query=${query}` : null;
+
         res.json({
             status: "sucess",
             payload: products.docs,
@@ -25,13 +29,15 @@ router.get("/", async (req, res) => {
             page: products.page,
             hasPrevPage: products.hasPrevPage,
             hasNextPage: products.hasNextPage,
-            prevLink: products.hasPrevPage ? `/api/products?limit=${limit}&page=${products.prevPage}&sort=${sort}&query=${query}` : null,
-            nextLink: products.hasNextPage ? `/api/products?limit=${limit}&page=${products.nextPage}&sort=${sort}&query=${query}` : null,
+            prevLink,
+            nextLink
         })
        
     } catch (error) {
         console.error("Ha ocurrido un error al obtener los productos.", error)
-        res.status(500).json({error: "Error al obtener el producto"})
+        /* res.status(500).json({error: "Error al obtener el producto"}) */
+        res.status(500).json({ error: "Error al obtener el producto", details: error.message }); // Detalle del error añadido
+
     }
 })
 

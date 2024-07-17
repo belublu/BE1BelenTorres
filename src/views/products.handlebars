@@ -1,5 +1,6 @@
 <div class="container">
-    <h1 class="title text-center my-3 py-5">Lista de productos</h1>
+    <h1 class="title text-center my-3 py-2">Librería Pepita</h1>
+    <h2 class="title text-center my-3 py-2">Lista de productos</h2>
     <div class="row">
         {{#each products}}
         <div class="col-4 mb-4">
@@ -12,21 +13,22 @@
                     <p class="card-text">Código: {{this.code}}</p>
                     <p class="card-text">Stock: {{this.stock}}</p>
                     <p class="card-text">Categoría: {{this.category}}</p>
+                    <button type="submit" id="btnSend" class="btn btn-danger my-3 w-100">Agregar producto</button>
                 </div>
             </div>
         </div>
         {{/each}}
-
-        <div class="col-12 text-center">
-            {{#if hasPrevPage}}
-                <a href="{{prevLink}}" class="btn btn-primary">Anterior</a>
-            {{/if}}
-
-            {{#if hasNextPage}}
-                <a href="{{nextLink}}" class="btn btn-primary">Siguiente</a>
-            {{/if}}
-
-            <p>Página {{currentPage}} de {{totalPages}}</p>
-        </div>
     </div>
+    <div class="col-12 text-center">
+        {{#if hasPrevPage}}
+            <a href="/products?page={{prevLink}}" class="btn btn-primary">Anterior</a>
+        {{/if}}
+
+        {{#if hasNextPage}}
+            <a href="/products?page={{nextLink}}" class="btn btn-primary">Siguiente</a>
+        {{/if}}
+
+        <p>Página {{currentPage}} de {{totalPages}}</p>
+    </div>
+
 </div>

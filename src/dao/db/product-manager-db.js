@@ -34,14 +34,13 @@ class ProductManager {
             throw error
         }
     }
-
-    async getProducts() {
+    async getProducts(query = {}, options = {}) {
         try {
-            const arrayProducts = await ProductModel.find().lean()
-            return arrayProducts
+            const arrayProducts = await ProductModel.paginate(query, { ...options, lean: true });
+            return arrayProducts;
         } catch (error) {
-            console.log("Error al obtener los productos", error)
-            throw error
+            console.log("Error al obtener los productos", error);
+            throw error;
         }
     }
 
@@ -52,7 +51,7 @@ class ProductManager {
             if (!productToSearch) {
                 console.log("El producto no ha sido encontrado")
                 return null
-            } else { 
+            } else {
                 return productToSearch
             }
         } catch (error) {
@@ -80,13 +79,13 @@ class ProductManager {
     async deleteProduct(id) {
         try {
             const deleteProd = await ProductModel.findByIdAndDelete(id)
-            if(!deleteProd){ 
+            if (!deleteProd) {
                 console.log("El producto no ha sido encontrado.")
                 return null
-            }else{
+            } else {
                 console.log("El producto ha sido eliminado exitosamente.")
                 return deleteProd
-            } 
+            }
         } catch (error) {
             console.error("Error al eliminar el producto.", error)
             throw error
