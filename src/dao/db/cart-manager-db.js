@@ -54,7 +54,70 @@ class CartManager {
             throw error
         }
     }
+
+    async deleteProductFromCart(cartId, productId) {
+        try {
+            const cart = await CartModel.findById(cartId);
+            if (!cart) {
+                return false;
+            }
+
+            const productIndex = cart.products.findIndex(p => p.product._id.toString() === productId);
+            if (productIndex === -1) {
+                return false;
+            }
+
+            cart.products.splice(productIndex, 1);
+            await cart.save();
+            return true;
+        } catch (error) {
+            throw new Error('Error al eliminar el producto del carrito');
+        }
+    }
+
+    async updateCart(cartId, products){
+        try {
+            const cart = await CartModel.findById(cartId)
+            if(!cart){
+                return false
+            }
+
+            cart.products = products
+            await cart.save()
+            return true
+        } catch (error) {
+            console.log(error)
+            throw new Error("Error al actualizar el carrito.")
+        }
+    }
+
+    async updateProdQuantity(cartId, productId, quantity){
+        try {
+            const cart = await CartModel.findById(cartId)
+            if(!cart){
+                return false
+            }
+
+            // Acá busco el producto en el carrito usando el id correcto
+            const product = cart.products.find(p => p.product._id.toString() === productId)
+            if(!product){
+                return false
+            }
+
+            // Acá actualizo la cantidad solicitada
+            product.quantity = quantity
+            await cart.save()
+            return true
+        } catch (error) {
+            console.log(error)
+            throw new Error("Error al actualizar la cantidad del producto.")
+        }
+    }
+
 }
+
+
+
 
 
 export default CartManager
