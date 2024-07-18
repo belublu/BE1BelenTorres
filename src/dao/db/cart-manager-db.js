@@ -3,7 +3,7 @@ import CartModel from "../models/cart.model.js"
 class CartManager {
     async getCarts() {
         try {
-            const carts = await CartModel.find()
+            const carts = await CartModel.find().populate("products.product")
             return carts
         } catch (error) {
             console.log("Error al obtener los carritos", error);
@@ -55,5 +55,6 @@ class CartManager {
         }
     }
 }
+
 
 export default CartManager

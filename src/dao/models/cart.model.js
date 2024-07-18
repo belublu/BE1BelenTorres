@@ -17,10 +17,10 @@ const cartSchema = new mongoose.Schema({
 })
 
 cartSchema.pre("findOne", function(next) {
-    this.populate("products.product", "_id title price description")
+    this.populate("products.product"/*  , "_id title price description" */ )
     next()
 })
 
-const CartModel = mongoose.model("carts", cartSchema)
+const CartModel = mongoose.model("Cart", cartSchema)
 
 export default CartModel
