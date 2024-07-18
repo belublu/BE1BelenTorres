@@ -21,11 +21,11 @@
     </div>
     <div class="col-12 text-center">
         {{#if hasPrevPage}}
-            <a href="/products?page={{prevLink}}" class="btn btn-primary">Anterior</a>
+            <a href="{{prevLink}}" class="btn btn-primary">Anterior</a>
         {{/if}}
 
         {{#if hasNextPage}}
-            <a href="/products?page={{nextLink}}" class="btn btn-primary">Siguiente</a>
+            <a href="{{nextLink}}" class="btn btn-primary">Siguiente</a>
         {{/if}}
 
         <p>Página {{currentPage}} de {{totalPages}}</p>

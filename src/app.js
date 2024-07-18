@@ -19,7 +19,7 @@ app.use(express.static("./src/public"))
 
 app.use("/api/products", productsRouter)
 app.use("/api/carts", cartsRouter)
-app.use("/products", viewsRouter)
+app.use("/", viewsRouter)
 
 app.engine("handlebars", exphbs.engine())
 app.set("view engine", "handlebars")

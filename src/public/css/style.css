@@ -8,3 +8,8 @@ form{
     background-color: rgb(255 71 129 / 18%);
     border-radius: 5px;
 }
+
+.emptyCart{
+    font-size: 20px;
+    font-weight: bolder;
+}

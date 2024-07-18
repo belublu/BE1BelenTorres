@@ -1,0 +1,23 @@
+<div class="container">
+    <h1 class="title text-center my-3 py-2">Librería Pepita</h1>
+    <h2 class="title text-center my-3 py-2">Carrito de compras</h2>
+    <div class="row">
+        {{#if message}}
+            <p class="emptyCart text-center my-5">{{message}}</p>
+        {{else}}
+            {{#each products}}
+            <div class="col-12 mb-4">
+                <div class="card" style="width: 100%">
+                    <img src="{{this.product.img}}" class="card-img-top" alt="FotoProducto">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{this.product.title}}</h5>
+                        <p class="card-text">Descripción: {{this.product.description}}</p>
+                        <p class="card-text">Precio: ${{this.product.price}}</p>
+                        <p class="card-text">Cantidad: {{this.quantity}}</p>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        {{/if}}
+    </div>
+</div>

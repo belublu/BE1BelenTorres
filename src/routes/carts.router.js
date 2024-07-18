@@ -27,7 +27,7 @@ router.get("/:cid", async (req, res) => {
     const cartId = req.params.cid
 
     try {
-        const cart = await cartManager.findById(cartId)
+        const cart = await CartModel.findById(cartId)
         if (cart) {
             res.json(cart.products)
         } else {
