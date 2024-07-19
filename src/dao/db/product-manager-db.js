@@ -34,13 +34,14 @@ class ProductManager {
             throw error
         }
     }
+
     async getProducts(query = {}, options = {}) {
         try {
-            const arrayProducts = await ProductModel.paginate(query, { ...options, lean: true });
-            return arrayProducts;
+            const arrayProducts = await ProductModel.paginate(query, { ...options, lean: true })
+            return arrayProducts
         } catch (error) {
-            console.log("Error al obtener los productos", error);
-            throw error;
+            console.log("Error al obtener los productos", error)
+            throw error
         }
     }
 

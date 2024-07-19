@@ -57,21 +57,21 @@ class CartManager {
 
     async deleteProductFromCart(cartId, productId) {
         try {
-            const cart = await CartModel.findById(cartId);
+            const cart = await CartModel.findById(cartId)
             if (!cart) {
-                return false;
+                return false
             }
 
-            const productIndex = cart.products.findIndex(p => p.product._id.toString() === productId);
+            const productIndex = cart.products.findIndex(p => p.product._id.toString() === productId)
             if (productIndex === -1) {
                 return false;
             }
 
-            cart.products.splice(productIndex, 1);
-            await cart.save();
-            return true;
+            cart.products.splice(productIndex, 1)
+            await cart.save()
+            return true
         } catch (error) {
-            throw new Error('Error al eliminar el producto del carrito');
+            throw new Error('Error al eliminar el producto del carrito')
         }
     }
 
@@ -98,13 +98,11 @@ class CartManager {
                 return false
             }
 
-            // Acá busco el producto en el carrito usando el id correcto
             const product = cart.products.find(p => p.product._id.toString() === productId)
             if(!product){
                 return false
             }
 
-            // Acá actualizo la cantidad solicitada
             product.quantity = quantity
             await cart.save()
             return true
@@ -114,10 +112,20 @@ class CartManager {
         }
     }
 
+    async emptyCart(cartId){
+        try {
+            const cart = await CartModel.findById(cartId)
+            if(!cart){
+                return false
+            }
+
+            cart.products = []
+            await cart.save()
+            return true
+        } catch (error) {
+            throw new Error ("Error al vaciar el carrito.")
+        }
+    }
 }
-
-
-
-
 
 export default CartManager

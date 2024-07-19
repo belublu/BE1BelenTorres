@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const cartSchema = new mongoose.Schema({
     products: [
@@ -17,7 +17,7 @@ const cartSchema = new mongoose.Schema({
 })
 
 cartSchema.pre("findOne", function(next) {
-    this.populate("products.product"/*  , "_id title price description" */ )
+    this.populate("products.product")
     next()
 })
 

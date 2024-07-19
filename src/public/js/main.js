@@ -60,7 +60,7 @@ const addProduct = () => {
         stock: parseInt(stockProduct),
         category: categoryProduct,
     }
-    socket.emit("addProduct", product);
+    socket.emit("addProduct", product)
 }
 
 

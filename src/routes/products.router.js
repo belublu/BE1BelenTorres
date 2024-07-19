@@ -1,20 +1,19 @@
-import express from "express";
-import ProductManager from "../dao/db/product-manager-db.js";
+import express from "express"
+import ProductManager from "../dao/db/product-manager-db.js"
 
 const router = express.Router()
 const productManager = new ProductManager()
 
-
 router.get("/", async (req, res) => {
     try {
-        const {page = 1, sort= "asc", query} = req.query
+        const {page = 1, sort= "asc", query, limit = 10} = req.query
         const options = {
             page: parseInt(page),
+            limit: parseInt(limit),
             sort: sort ? { price: sort === "asc" ? 1 : -1 } : {},
             query,
         }
         const products = await productManager.getProducts(query ? {category: query} : {}, options)
-
         console.log("Productos obtenidos:", products.docs)
 
         const prevLink = products.hasPrevPage ? `/products?limit=${limit}&page=${products.prevPage}&sort=${sort}&query=${query}` : null;
@@ -32,19 +31,15 @@ router.get("/", async (req, res) => {
             prevLink,
             nextLink
         })
-       
     } catch (error) {
         console.error("Ha ocurrido un error al obtener los productos.", error)
-        /* res.status(500).json({error: "Error al obtener el producto"}) */
-        res.status(500).json({ error: "Error al obtener el producto", details: error.message }); // Detalle del error añadido
+        res.status(500).json({ error: "Error al obtener el producto", details: error.message })
 
     }
 })
 
-
 router.get("/:pid", async (req, res) => {
     const id = req.params.pid
-
     try {
         const product = await productManager.getProductById(id)
         if(!product){
@@ -56,10 +51,8 @@ router.get("/:pid", async (req, res) => {
     }
 })
 
-
 router.post("/", async (req, res) => {
     const newProduct = req.body
-    
     try {
         await productManager.addProduct(newProduct)
         res.status(201).json({message: "El producto ha sido agregado correctamente."})
@@ -68,11 +61,9 @@ router.post("/", async (req, res) => {
     }
 })
 
-
 router.put("/:pid", async (req, res) => {
     const id = req.params.pid
     const productUpdated = req.body
-    
     try {
         await productManager.updateProduct(id, productUpdated)
         if(productUpdated){
@@ -85,11 +76,9 @@ router.put("/:pid", async (req, res) => {
     }
 })
 
-
 router.delete("/:pid", async (req, res) => {
     const id = req.params.pid
     const productDeleted = req.body
-    
     try {
         await productManager.deleteProduct(id, productDeleted)
         if(productDeleted){
@@ -101,6 +90,5 @@ router.delete("/:pid", async (req, res) => {
         res.status(500).json({error: "Error al actualizar el producto.", error})
     }
 })
-
 
 export default router
