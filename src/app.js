@@ -25,11 +25,12 @@ initializePassport()
 app.use("/api/products", productsRouter)
 app.use("/api/carts", cartsRouter)
 app.use("/", viewsRouter)
+app.use("/api/sessions", sessionRouter)
 
 app.engine("handlebars", exphbs.engine())
 app.set("view engine", "handlebars")
 app.set("views", "./src/views")
-app.set("/api/sessions", sessionRouter)
+
 
 const httpServer = app.listen(PORT, () => {
     console.log(`Escuchando en el puerto: ${PORT}`)
