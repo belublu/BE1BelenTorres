@@ -5,34 +5,31 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    first_name:{
+    first_name: {
         type: String,
         required: true
     },
-    last_name:{
+    last_name: {
         type: String,
         required: true
     },
-    email:{
+    email: {
         type: String,
         unique: true,
         required: true
     },
-    age:{
+    age: {
         type: Number,
         required: true
     },
-    password:{
+    password: {
         type: String,
         required: true
     },
-    // cart:{
-    //     cartId: createCart()
-    // },
-    rol:{
+    rol: {
         type: String,
-        enum: ["admin", "user"],
-        default: "user"
+        enum: ["Admin", "User"],
+        default: "User"
     },
 })
 

@@ -63,4 +63,3 @@ const addProduct = () => {
     socket.emit("addProduct", product)
 }
 
-

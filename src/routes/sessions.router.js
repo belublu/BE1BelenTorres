@@ -66,7 +66,14 @@ router.post("/login", async(req, res) => {
             return res.status(401).json("La contraseña es incorrecta")
         }
 
-        const token = jwt.sign({user: userFind.user, rol: userFind.rol}, "pepita", {expiresIn: "1h"})
+        const token = jwt.sign({
+            user: userFind.user, 
+            first_name: userFind.first_name,
+            last_name: userFind.last_name,
+            age: userFind.age,
+            email: userFind.email,
+            rol: userFind.rol
+        }, "pepita", {expiresIn: "1h"})
 
         res.cookie("pepitaCookieToken", token, {
             maxAge: 360000,
@@ -84,7 +91,15 @@ router.post("/login", async(req, res) => {
 // Current
 router.get("/current", passport.authenticate("jwt", {session: false}), (req, res) => {
     if(req.user){
-        res.render("home", {user: req.user.user})
+        console.log(req.user)
+        res.render("home", {
+            user: req.user.user,
+            first_name: req.user.first_name,
+            last_name: req.user.last_name,
+            email: req.user.email,
+            age: req.user.age,
+            rol: req.user.rol
+        })
     }else {
         res.status(401).json({error: "Usuario no autorizado"})
     }
@@ -99,9 +114,10 @@ router.post("/logout", (req, res) => {
 
 // Ruta para admins
 router.get("/admin", passport.authenticate("jwt", {session: false}), (req, res) => {
-    if(req.user.rol != "admin") {
-        return res.status(403).json({error: "Acceso denegado"})
+    if(req.user.rol != "Admin") {
+        return res.status(403).send("Acceso sólo para administradores")
     }
+    console.log(req.user.user)
     res.render("admin", {user: req.user.user})
 })
 
