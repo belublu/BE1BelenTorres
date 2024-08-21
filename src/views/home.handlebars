@@ -1,11 +1,17 @@
-<h1>Hola {{user}}!!</h1>
-
-<p>Nombre: {{first_name}}</p>
-<p>Apellido: {{last_name}}</p>
-<p>Email: {{email}}</p>
-<p>Edad: {{age}}</p>
-<p>Rol: {{rol}}</p>
-<p>Cart: {{cart}}</p>
-<form action="/api/sessions/logout" method="POST">
-    <button class="btn btn-danger m-1">Logout</button>
-</form>
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="container text-center">
+        <h1 class="display-3">Hola {{user}}!!</h1>
+        <div class="card">
+            <p><strong>Nombre:</strong> {{first_name}}</p>
+            <p><strong>Apellido:</strong> {{last_name}}</p>
+            <p><strong>Email:</strong> {{email}}</p>
+            <p><strong>Edad:</strong> {{age}}</p>
+            <p><strong>Role:</strong> {{role}}</p>
+        </div>
+        <div>
+            <form action="/api/sessions/logout" method="POST">
+                <button type="submit" class="btn btn-danger logout-button">Logout</button>
+            </form>
+        </div>
+    </div>
+</div>

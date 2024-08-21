@@ -1,17 +1,23 @@
-<h1>Registro de usuarios</h1>
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="container containerRegister text-center">
+        <h1>Registro de usuarios</h1>
 
-<form action="/api/sessions/register" method="POST">
-    <input type="text" name="user" placeholder="Usuario" required>
-    <br><br>
-    <input type="text" name="first_name" placeholder="Nombre" required>
-    <br><br>
-    <input type="text" name="last_name" placeholder="Apellido" required>
-    <br><br>
-    <input type="email" name="email" placeholder="Email" required>
-    <br><br>
-    <input type="number" name="age" placeholder="Edad" required>
-    <br><br>
-    <input type="password" name="password" placeholder="Contraseña" required>
-    <br><br>
-    <button type="submit" class="btn btn-danger m-1">Registrarse</button>
-</form>
+        <div class="cardRegister">
+            <form class="formRegister" action="/api/sessions/register" method="POST">
+                <input type="text" name="user" placeholder="Usuario" required>
+                <br><br>
+                <input type="text" name="first_name" placeholder="Nombre" required>
+                <br><br>
+                <input type="text" name="last_name" placeholder="Apellido" required>
+                <br><br>
+                <input type="email" name="email" placeholder="Email" required>
+                <br><br>
+                <input type="number" name="age" placeholder="Edad" required>
+                <br><br>
+                <input type="password" name="password" placeholder="Contraseña" required>
+                <br><br>
+                <button type="submit" class="btn btn-danger m-1">Registrarse</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -6,13 +6,13 @@ import jwt from "jsonwebtoken"
 const router = Router()
 
 // Registro
-router.post("/register", async(req, res) => {
+router.post("/register", async (req, res) => {
     console.log("Datos recibidos:", req.body);
 
-    const {user, first_name, last_name, email, age, password, rol} = req.body
+    const { user, first_name, last_name, email, age, password, role } = req.body
     try {
-        const userExist = await UserModel.findOne({user})
-        if(userExist) {
+        const userExist = await UserModel.findOne({ user })
+        if (userExist) {
             console.log("Usuario ya existe");
 
             return res.status(400).json({ error: "El usuario ya existe", error })
@@ -27,14 +27,21 @@ router.post("/register", async(req, res) => {
             email,
             age,
             password: createHash(password),
-            rol
+            role
         })
 
         console.log("Usuario guardado exitosamente");
 
         await newUser.save()
 
-        const token = jwt.sign({user: newUser.user, role: newUser.rol}, "pepita", {expiresIn: "1h"})
+        const token = jwt.sign({
+            user: newUser.user,
+            first_name: newUser.first_name,
+            last_name: newUser.last_name,
+            email: newUser.email,
+            age: newUser.age,
+            role: newUser.role
+        }, "pepita", { expiresIn: "1h" })
 
         res.cookie("pepitaCookieToken", token, {
             maxAge: 360000,
@@ -44,36 +51,36 @@ router.post("/register", async(req, res) => {
 
         res.redirect("/api/sessions/current")
     } catch (error) {
-        return res.status(500).json({ error: "Error interno del servidor", details: error.message})
+        return res.status(500).json({ error: "Error interno del servidor", details: error.message })
     }
 })
 
 // Login
-router.post("/login", async(req, res) => {
-    const {user, password} = req.body
+router.post("/login", async (req, res) => {
+    const { user, password } = req.body
     console.log("el usuario es", user)
     try {
-        const userFind = await UserModel.findOne({user})
+        const userFind = await UserModel.findOne({ user })
 
-        if(!userFind){
+        if (!userFind) {
             console.log("Usuario no encontrado:", user);
-            return res.status(401).json({error: "Usuario no válido"})
+            return res.status(401).json({ error: "Usuario no válido" })
         }
 
-        if(!isValidPassword(password, userFind)) {
+        if (!isValidPassword(password, userFind)) {
             console.log("Contraseña incorrecta para el usuario:", user);
 
             return res.status(401).json("La contraseña es incorrecta")
         }
 
         const token = jwt.sign({
-            user: userFind.user, 
+            user: userFind.user,
             first_name: userFind.first_name,
             last_name: userFind.last_name,
             age: userFind.age,
             email: userFind.email,
-            rol: userFind.rol
-        }, "pepita", {expiresIn: "1h"})
+            role: userFind.role
+        }, "pepita", { expiresIn: "1h" })
 
         res.cookie("pepitaCookieToken", token, {
             maxAge: 360000,
@@ -84,13 +91,13 @@ router.post("/login", async(req, res) => {
     } catch (error) {
         console.error("Error durante el login:", error);
 
-        return res.status(500).json({ error: "Error interno del servidor"})
+        return res.status(500).json({ error: "Error interno del servidor" })
     }
 })
 
 // Current
-router.get("/current", passport.authenticate("jwt", {session: false}), (req, res) => {
-    if(req.user){
+router.get("/current", passport.authenticate("jwt", { session: false }), (req, res) => {
+    if (req.user) {
         console.log(req.user)
         res.render("home", {
             user: req.user.user,
@@ -98,10 +105,10 @@ router.get("/current", passport.authenticate("jwt", {session: false}), (req, res
             last_name: req.user.last_name,
             email: req.user.email,
             age: req.user.age,
-            rol: req.user.rol
+            role: req.user.role
         })
-    }else {
-        res.status(401).json({error: "Usuario no autorizado"})
+    } else {
+        res.status(401).json({ error: "Usuario no autorizado" })
     }
 })
 
@@ -113,12 +120,12 @@ router.post("/logout", (req, res) => {
 })
 
 // Ruta para admins
-router.get("/admin", passport.authenticate("jwt", {session: false}), (req, res) => {
-    if(req.user.rol != "Admin") {
+router.get("/admin", passport.authenticate("jwt", { session: false }), (req, res) => {
+    if (req.user.role != "Admin") {
         return res.status(403).send("Acceso sólo para administradores")
     }
     console.log(req.user.user)
-    res.render("admin", {user: req.user.user})
+    res.render("admin", { user: req.user.user })
 })
 
 export default router

@@ -1,15 +1,51 @@
-.card{
+.card {
     --bs-card-border-color: rgb(255 71 129 / 18%);
     --bs-card-border-width: 2px;
     background-color: #fd0d0d17;
 }
 
-form{
+form {
     background-color: rgb(255 71 129 / 18%);
     border-radius: 5px;
 }
 
-.emptyCart{
+.emptyCart {
     font-size: 20px;
     font-weight: bolder;
+}
+
+.h1Admin {
+    color: red;
+}
+
+.containerLogin, .containerRegister {
+    background-color: #f2d5f6;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    max-width: 500px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.alertAdmin {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+.cardLogin, .cardRegister {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fdf7f7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.formLogin, .formRegister{
+    background-color: #ffffff;
+}
+
+.containerRegister {
+    height: 550px;
 }
