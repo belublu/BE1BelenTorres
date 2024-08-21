@@ -6,7 +6,10 @@ import viewsRouter from "./routes/views.router.js"
 import "./database.js"
 import ProductManager from "./dao/db/product-manager-db.js"
 import { Server } from "socket.io"
-
+import cookieParser from "cookie-parser"
+import passport from "passport"
+import initializePassport from "./config/passport.config.js"
+import sessionRouter from "./routes/sessions.router.js"
 
 const app = express()
 const PORT = 8080
@@ -15,7 +18,9 @@ const productManager = new ProductManager("src/models/products.json")
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(express.static("./src/public"))
-
+app.use(cookieParser())
+app.use(passport.initialize())
+initializePassport()
 
 app.use("/api/products", productsRouter)
 app.use("/api/carts", cartsRouter)
@@ -24,6 +29,7 @@ app.use("/", viewsRouter)
 app.engine("handlebars", exphbs.engine())
 app.set("view engine", "handlebars")
 app.set("views", "./src/views")
+app.set("/api/sessions", sessionRouter)
 
 const httpServer = app.listen(PORT, () => {
     console.log(`Escuchando en el puerto: ${PORT}`)

@@ -1,6 +1,10 @@
 <div class="container">
     <h1 class="title text-center my-3 py-2">Librería Pepita</h1>
     <h2 class="title text-center my-3 py-2">Lista de productos</h2>
+    <div class="d-flex justify-content-end p-2">
+        <a href="/login" class="btn btn-danger m-1">Login</a>
+        <a href="/register" class="btn btn-danger m-1">Registrarse</a>
+    </div>
     <div class="row">
         {{#each products}}
         <div class="col-4 mb-4">
@@ -21,13 +25,13 @@
     </div>
     <div class="col-12 text-center">
         {{#if hasPrevPage}}
-            <a href="{{prevLink}}" class="btn btn-primary">Anterior</a>
+        <a href="{{prevLink}}" class="btn btn-primary">Anterior</a>
         {{/if}}
 
         {{#if hasNextPage}}
-            <a href="{{nextLink}}" class="btn btn-primary">Siguiente</a>
+        <a href="{{nextLink}}" class="btn btn-primary">Siguiente</a>
         {{/if}}
-        
+
         <p>Página {{currentPage}} de {{totalPages}}</p>
     </div>
 </div>
